@@ -22,7 +22,6 @@ export default function LineChartWeather() {
                 flexDirection: 'column'
             }}
         >
-
             {/* Componente para un gráfico de líneas */}
             <LineChart
                 width={400}

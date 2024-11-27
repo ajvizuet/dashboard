@@ -17,7 +17,7 @@ export default function IndicatorWeather(config: Indicator) {
                 {config.value}
             </Typography>
             <Typography color="text.secondary" sx={{flex: 1}}>
-                {config.title}
+                {config.subtitle}
             </Typography>
         </Paper>
     )
