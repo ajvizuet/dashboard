@@ -28,7 +28,7 @@ export default function ControlWeather() {
     const handleChange = (event: SelectChangeEvent) => {
         let idx = parseInt(event.target.value);
         setSelected(idx);
-    
+        console.log(selected);
         if(descriptionRef.current !== null) {
             descriptionRef.current.innerHTML = (idx >= 0)? items[idx]["description"] : "";
         }
