@@ -1,19 +1,25 @@
 import Paper from '@mui/material/Paper';
 import { LineChart } from '@mui/x-charts/LineChart';
 
-const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
-const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-    'Page A',
-    'Page B',
-    'Page C',
-    'Page D',
-    'Page E',
-    'Page F',
-    'Page G',
-];
+import Item from '../interface/Item';
+import { useEffect, useState } from 'react';
 
-export default function LineChartWeather() {
+const variables: (keyof Item)[] = ["precipitation", "humidity", "clouds"];
+
+interface LineChartProp {
+    itemsIn: Item[];
+    selected: number;
+}
+
+export default function LineChartWeather(props: LineChartProp) {
+    let [labels, setLabels] = useState<String[]>([]);
+    let [vData, setVData] = useState<number[]>([]);
+    useEffect(() => {
+        if(props.itemsIn) {
+            setLabels(props.itemsIn.map((item) => item['dateStart'].split("T")[1]));
+            setVData(props.itemsIn.map((item) => Number(item[variables[props.selected]])));
+        }
+    }, [props])
     return (
         <Paper
             sx={{
@@ -24,13 +30,11 @@ export default function LineChartWeather() {
         >
             {/* Componente para un gráfico de líneas */}
             <LineChart
-                width={400}
-                height={250}
+                height={300}
                 series={[
-                    { data: pData, label: 'pv' },
-                    { data: uData, label: 'uv' },
+                    { data: vData, label: variables[props.selected] },
                 ]}
-                xAxis={[{ scaleType: 'point', data: xLabels }]}
+                xAxis={[{ scaleType: 'point', data: labels }]}
             />
         </Paper>
     );

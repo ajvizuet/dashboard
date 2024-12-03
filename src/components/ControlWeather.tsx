@@ -7,11 +7,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
-import {useState, useRef} from 'react';
-   
-export default function ControlWeather() {
+import {useRef} from 'react';
 
-    let [selected, setSelected] = useState(-1);
+interface selectProp {
+    setSelected: React.Dispatch<React.SetStateAction<number>>;
+}
+   
+export default function ControlWeather({ setSelected }: selectProp) {
     const descriptionRef = useRef<HTMLDivElement>(null);
 ;
     {/* Arreglo de objetos */}
@@ -28,7 +30,6 @@ export default function ControlWeather() {
     const handleChange = (event: SelectChangeEvent) => {
         let idx = parseInt(event.target.value);
         setSelected(idx);
-        console.log(selected);
         if(descriptionRef.current !== null) {
             descriptionRef.current.innerHTML = (idx >= 0)? items[idx]["description"] : "";
         }

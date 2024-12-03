@@ -18,6 +18,7 @@ interface Indicator {
 function App() {
   let [indicators, setIndicators] = useState<Indicator[]>([]);
   let [items, setItems] = useState<Item[]>([]);
+  let [selected, setSelected] = useState(-1);
   {/* Use Effect */ }
   useEffect(() => {
     let request = async () => {
@@ -45,7 +46,7 @@ function App() {
       let altitude = location.getAttribute("altitude") || ""
       dataToIndicators.push({ "title": "Location", "subtitle": "Altitude", "value": altitude })
 
-      for(let i = 0; i < 6; i++) {
+      for (let i = 0; i < 6; i++) {
         let time = xml.getElementsByTagName('time')[i];
         let from = time.getAttribute('from') || "";
         let to = time.getAttribute('to') || "";
@@ -59,15 +60,17 @@ function App() {
         let clouds = time.getElementsByTagName("clouds")[0];
         let cloudsAll = clouds.getAttribute('all') || "";
 
-        let item: Item = {dateStart: from, 
-          dateEnd: to, 
-          precipitation: prob, 
-          humidity: humidityValue, 
-          clouds: cloudsAll};
+        let item: Item = {
+          dateStart: from,
+          dateEnd: to,
+          precipitation: prob,
+          humidity: humidityValue,
+          clouds: cloudsAll
+        };
 
         dataToItems.push(item);
       };
-      
+
       setItems(dataToItems);
       setIndicators(dataToIndicators);
     };
@@ -92,17 +95,17 @@ function App() {
 
       <Grid size={{ xs: 12, lg: 12 }}>
         <Grid container spacing={2}>
-          <Grid size={{ xs: 12, lg: 3 }}>
-            <ControlWeather />
-          </Grid>
           <Grid size={{ xs: 12, lg: 9 }}>
-            <TableWeather itemsIn = { items } />
+            <LineChartWeather itemsIn={ items }  selected={selected} />
+          </Grid>
+          <Grid size={{ xs: 12, lg: 3 }}>
+            <ControlWeather setSelected={ setSelected } />
           </Grid>
         </Grid>
       </Grid>
 
-      <Grid size={{ xs: 12, lg: 8 }}>
-        <LineChartWeather />
+      <Grid size={{ xs: 12, lg: 12 }}>
+        <TableWeather itemsIn={items} />
       </Grid>
 
     </Grid>
