@@ -20,7 +20,8 @@ export default function ControlWeather({ setSelected }: selectProp) {
     let items = [
         {"name":"Precipitación", "description":"Cantidad de agua que cae sobre una superficie en un período específico."}, 
         {"name": "Humedad", "description":"Cantidad de vapor de agua presente en el aire, generalmente expresada como un porcentaje."}, 
-        {"name":"Nubosidad", "description":"Grado de cobertura del cielo por nubes, afectando la visibilidad y la cantidad de luz solar recibida."}
+        {"name":"Nubosidad", "description":"Grado de cobertura del cielo por nubes, afectando la visibilidad y la cantidad de luz solar recibida."},
+        {"name":"Temperatura", "description":"Temperatura promedio del ambiente en grados centrígrados "}
     ]
 
     {/* Arreglo de elementos JSX */}

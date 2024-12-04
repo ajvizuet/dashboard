@@ -4,7 +4,7 @@ import { LineChart } from '@mui/x-charts/LineChart';
 import Item from '../interface/Item';
 import { useEffect, useState } from 'react';
 
-const variables: (keyof Item)[] = ["precipitation", "humidity", "clouds"];
+const variables: (keyof Item)[] = ["precipitation", "humidity", "clouds", "temperature"];
 
 interface LineChartProp {
     itemsIn: Item[];

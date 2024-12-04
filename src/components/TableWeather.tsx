@@ -28,6 +28,7 @@ export default function BasicTable(props: MyProp) {
             <TableCell>Precipitación</TableCell>
             <TableCell>Humedad</TableCell>
             <TableCell>Nubosidad</TableCell>
+            <TableCell>Temperatura</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -50,6 +51,9 @@ export default function BasicTable(props: MyProp) {
               </TableCell>
               <TableCell component="th" scope="row">
                 {row.clouds}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {row.temperature}
               </TableCell>
             </TableRow>
           ))}
